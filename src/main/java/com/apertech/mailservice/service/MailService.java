@@ -1,5 +1,6 @@
 package com.apertech.mailservice.service;
 
+import com.apertech.mailservice.model.EmailVerification;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,8 @@ public class MailService {
 
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
-    public MailService(JavaMailSender javaMailSender,TemplateEngine templateEngine) {
+
+    public MailService(JavaMailSender javaMailSender, TemplateEngine templateEngine) {
         this.javaMailSender = javaMailSender;
         this.templateEngine = templateEngine;
     }
@@ -43,5 +45,11 @@ public class MailService {
         }
     }
 
-
+    public void emailVerification(String to, String subject, String userName, String token) {
+        EmailVerification verification = new EmailVerification();
+        verification.setUserName(userName);
+        verification.setSubject(subject);
+        verification.setToken(token);
+//        verification.set
+    }
 }

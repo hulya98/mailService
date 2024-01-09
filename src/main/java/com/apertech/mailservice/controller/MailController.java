@@ -1,13 +1,10 @@
 package com.apertech.mailservice.controller;
 
-import com.apertech.mailservice.model.EmailRequest;
+import com.apertech.mailservice.model.EmailVerification;
 import com.apertech.mailservice.service.MailService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.thymeleaf.context.Context;
 
 @RestController
 @RequestMapping("/api/v1/mail")
@@ -26,12 +23,25 @@ public class MailController {
         return "Email sent successfully!";
     }
 
-    @PostMapping("/send-html-email")
-    public String sendHtmlEmail(String to, String subject, String body) {
-        Context context = new Context();
-        context.setVariable("message", body);
+    @PostMapping("/send-verification-email")
+    public String sendVerificationEmail(String to, String subject, String body) {
 
-        emailService.sendEmailWithHtmlTemplate(to, subject, "email-template", context);
+
+//        EmailVerificationModel model = new EmailVerificationModel();
+//        model.language = "az";
+//        model.companyName = "Apertech";
+//        model.header = "Email Verification";
+//        Context context = new Context();
+////        context.setVariable("body", "neter olcihdi");
+//        context.setVariable("header", model.header);
+//        context.setVariable("buttonText", model.generateButtonText());
+////        context.setVariable("link", model.getEmailVerifiedLink());
+//        context.setVariable("companyName", model.GenerateCompanyNameTeamText());
+//        context.setVariable("developedInfo", model.GenerateDevelopedInformationText());
+//        context.setVariable("copyRight", model.GenerateCopyRightText());
+//
+//        emailService.sendEmailWithHtmlTemplate(to, subject, "email-template", context);
+
         return "HTML email sent successfully!";
     }
 }
