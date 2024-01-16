@@ -12,18 +12,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/mail")
 public class MailController {
 
-    private final MailService emailService;
+    private final MailService mailService;
 
-    public MailController(MailService emailService) {
-        this.emailService = emailService;
+    public MailController(MailService mailService) {
+        this.mailService = mailService;
     }
 
 
     @PostMapping("/send-verification-email")
-    public String sendVerificationEmail(String to, String subject, String body) {
-
+    public String sendVerificationEmail(String userName, String subject, String to, String token) {
+        mailService.sendVerificationMail(userName, subject, token, to);
         return "HTML email sent successfully!";
     }
 
+    @PostMapping("/send-registration-pending")
+    public String sendRegistrationPending(String userName, String subject, String to) {
+        mailService.sendRegistrationPendingMail(userName, subject, to);
+        return "HTML email send successfully!";
+    }
 
 }

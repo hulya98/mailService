@@ -9,6 +9,7 @@ open class BaseModel(
 {
     var body: String? = null
     var header: String? = null
+    var subject: String? = null
     var companyName: String? = null
     var language: String? = null
     val actualYear: Int = Calendar.getInstance().get(Calendar.YEAR)

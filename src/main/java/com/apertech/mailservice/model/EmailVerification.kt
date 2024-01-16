@@ -6,7 +6,6 @@ class EmailVerification(
 ) : BaseModel() {
 
     var token: String? = null
-    var subject: String? = null
     var userName: String? = null
     fun generateButtonText(): String? {
         return when (language) {
@@ -14,10 +13,6 @@ class EmailVerification(
             "en" -> "Verify Email Now"
             else -> null
         }!!
-    }
-
-    fun templateName(): String {
-        return "email-verification"
     }
 
     fun getEmailVerifiedLink(): String {
