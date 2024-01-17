@@ -55,18 +55,14 @@ public class MailService {
         }
     }
 
-    private Context setStaticDataToContext(String key) {
-        var data = getBaseData(key, "az");
-        Context context = new Context();
-        context.setVariable("header", data.getHeader());
-        context.setVariable("subject", data.getSubject());
-        context.setVariable("body", data.getBody());
-        return context;
-    }
-
     private Context fillVerificationContextData(String userName, String token, String to) {
         EmailVerification verification = new EmailVerification();
-        Context context = setStaticDataToContext("REG");
+        var data = getBaseData("VER", "az");
+        Context context = new Context();
+        verification.setLanguage("az");
+        context.setVariable("header", data.getHeader());
+        context.setVariable("subject", data.getSubject());
+        context.setVariable("body", MessageFormat.format(data.getBody(), userName));
         context.setVariable("automatEmailText", verification.generateAutomatedEmailText());
         context.setVariable("buttonText", verification.generateButtonText());
         context.setVariable("link", verification.getEmailVerifiedLink());
@@ -78,7 +74,12 @@ public class MailService {
 
     private Context fillRegistrationPendingContextData(String userName, String to) {
         EmailRegistrationPending pending = new EmailRegistrationPending();
-        Context context = setStaticDataToContext("RGA");
+        Context context = new Context();
+        var data = getBaseData("RGA", "az");
+        pending.setLanguage("az");
+        context.setVariable("header", data.getHeader());
+        context.setVariable("subject", data.getSubject());
+        context.setVariable("body", MessageFormat.format(data.getBody(), userName));
         context.setVariable("companyName", pending.getCompanyName());
         context.setVariable("developedInfo", pending.generateDevelopedInformationText());
         context.setVariable("copyRight", pending.generateCopyRightText());
